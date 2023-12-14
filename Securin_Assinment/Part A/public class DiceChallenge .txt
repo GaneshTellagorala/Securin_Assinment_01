@@ -1,0 +1,38 @@
+public class DiceChallenge {
+    public static void main(String[] args) {
+        // Part 1: Total Combinations
+        int numFacesDieA = 6;
+        int numFacesDieB = 6;
+        int totalCombinations = numFacesDieA * numFacesDieB;
+        System.out.println("Total Combinations: " + totalCombinations);
+
+        // Part 2: Distribution of Combinations
+        int[][] distributionMatrix = new int[numFacesDieA][numFacesDieB];
+        for (int i = 0; i < numFacesDieA; i++) {
+            for (int j = 0; j < numFacesDieB; j++) {
+                distributionMatrix[i][j] = (i + 1) + (j + 1);
+            }
+        }
+        System.out.println("Distribution Matrix:");
+        for (int i = 0; i < numFacesDieA; i++) {
+            for (int j = 0; j < numFacesDieB; j++) {
+                System.out.print(distributionMatrix[i][j] + " ");
+            }
+            System.out.println();
+        }
+
+        // Part 3: Probability of Sums
+        int[] sumOccurrences = new int[2 * numFacesDieA + 1]; // 2 * numFacesDieA + 1 represents the possible sums
+        for (int i = 0; i < numFacesDieA; i++) {
+            for (int j = 0; j < numFacesDieB; j++) {
+                int currentSum = (i + 1) + (j + 1);
+                sumOccurrences[currentSum]++;
+            }
+        }
+        System.out.println("Probabilities:");
+        for (int sum = 2; sum <= 2 * numFacesDieA; sum++) {
+            double probability = (double) sumOccurrences[sum] / totalCombinations;
+            System.out.println("P(Sum = " + sum + ") = " + probability);
+        }
+    }
+}
